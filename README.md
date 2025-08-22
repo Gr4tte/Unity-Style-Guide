@@ -95,7 +95,7 @@
 	  // ✅ Do  
 	 public bool IsGrounded { get; private set; }
 	 private bool _isAlive;
-### Booleans
+### Collections
   - always plural
 	  ```csharp
 	private List<int> _numbers;
