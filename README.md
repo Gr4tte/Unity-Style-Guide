@@ -36,7 +36,7 @@
   [SerializeField] private float _speed;
 ### Classes
   - `PascalCase`
-  - **Scriptable Objects** end with `SO`
+  - `ScriptableObjects` end with `SO`
     ```csharp
     public class EnemySO : ScriptableObject { }
   - **Singletons**
@@ -62,7 +62,7 @@
     - prefixed by `_`
     ```csharp
     private int _health;
-  - **Inspector Editable**
+  - **Exposed**
     - `camelCase` 
     - prefixed by `_`
     - using `SerializeField` attribute
@@ -106,4 +106,86 @@
   - `Update` - gameplay loop 
     - Avoid `FindObjectOfType` or `GetComponent`
     - Avoid code other than method calls
-  - 
+## Code Style
+### Formatting
+  - **Indentation** - 4 spaces
+  - **Braces** - New line
+	  ```csharp
+	  if (_isAlive)
+	  {
+	      DoSomething();
+	  }
+### Order in Classes
+  1. Constants
+  2. Public exposed fields
+  3. Private exposed fields
+  4. Public fields
+  5. Private fields
+  6. `Awake`
+  7. `OnEnable`
+  8. `OnDisable`
+  9. `Update`
+  10. Public methods
+  11. Private methods
+  12. Nested structs/Enums
+### Nesting
+Avoid deep nesting by early returns
+```csharp
+// ❌ Don’t
+if (_isAlive)
+{
+    DoStuff();
+}
+
+// ✅ Do
+if (!_isAlive) return;
+DoStuff();
+```
+### Ternary Operators
+Use ternary Operators when it improves readability
+```csharp
+// ❌ Don’t
+if (_isGrounded)
+{
+    _velocity.y = 0;
+}
+else
+{
+    _velocity.y = _newVelocity.y;
+}
+
+// ✅ Do
+_velocity.y = _isGrounded ? 0 : _newVelocity.y;
+```
+### Line Breaks
+Break long lines of code inte several lines
+```csharp
+// ❌ Don’t
+_myFloat = (someCalulation) * (anotherCalculation) - yetAnotherCalculation;
+transform.position = new Vector3(someCalculation, anotherCalculation, yetAnotherCalculation);
+transform.DoMoveX(1f, 1f).SetEase(Ease.Linear).SetLooping(-1).SetInverted().OnComplete(MyFunc);
+	
+// ✅ Do
+float val1 = someCalulation;
+float val2 = anotherCalculation;
+float val3 = yetAnotherCalculation;
+_myFloat = val1 * val2 - val3;
+
+transform.position = new Vector3(
+    someCalculation,
+    anotherCalculation,
+    yetAnotherCalculation);
+
+transform.DoMoveX(1f, 1f)
+	.SetEase(Ease.Linear)
+	.SetLooping(-1)
+	.SetInverted()
+	.OnComplete(MyFunc);
+```
+### Patterns & Anti-Patterns
+✅ Do
+  - Use `ScriptableObject` for shared shared or large datasets (enemies, player, items)
+  
+❌ Don’t
+   - Don't use `public` fields to expose members (use `[SerializeField] private`)
+   - Don't define more than one class per file
