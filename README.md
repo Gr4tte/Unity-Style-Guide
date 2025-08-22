@@ -1,5 +1,5 @@
 # Unity C# Coding & Project Style Guide
-
+Latest version can be found here - https://github.com/Gr4tte/Unity-Style-Guide
 ## File Structure
 `!Project` - Contains all user created files aside from "Resources" folder
 - `Art` - any graphics asset (`sprites`, `animations`, `textures`)
