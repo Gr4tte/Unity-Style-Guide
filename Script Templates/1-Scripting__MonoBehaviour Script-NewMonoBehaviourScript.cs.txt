@@ -1,0 +1,9 @@
+namespace #NAMESPACE#
+{
+    using UnityEngine;
+
+    public class #SCRIPTNAME# : MonoBehaviour
+    {
+        
+    }
+}
