@@ -95,3 +95,15 @@
 	  // ✅ Do  
 	 public bool IsGrounded { get; private set; }
 	 private bool _isAlive;
+### Booleans
+  - always plural
+	  ```csharp
+	private List<int> _numbers;
+	private string[] _names;
+## Unity Specific
+  - `Awake` - cache reference (don't call another class' methods or fields)
+  - `Start` - initialization requiring another class' methods and fields
+  - `Update` - gameplay loop 
+    - Avoid `FindObjectOfType` or `GetComponent`
+    - Avoid code other than method calls
+  - 
