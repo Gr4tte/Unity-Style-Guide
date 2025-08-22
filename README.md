@@ -115,7 +115,8 @@
    - Don't define more than one class per file
 ## Code Style
 ### Formatting
-  - **Indentation** - 4 spaces
+  - **Indentation style** - Tabs
+  - **Tab size** - 4
   - **Braces** - New line
 	  ```csharp
 	  if (_isAlive)
