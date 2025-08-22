@@ -106,6 +106,13 @@
   - `Update` - gameplay loop 
     - Avoid `FindObjectOfType` or `GetComponent`
     - Avoid code other than method calls
+## Patterns & Anti-Patterns
+✅ Do
+  - Use `ScriptableObject` for shared shared or large datasets (enemies, player, items)
+  
+❌ Don’t
+   - Don't use `public` fields to expose members (use `[SerializeField] private`)
+   - Don't define more than one class per file
 ## Code Style
 ### Formatting
   - **Indentation** - 4 spaces
@@ -115,6 +122,28 @@
 	  {
 	      DoSomething();
 	  }
+### Construction & Typing
+  - Use explicit types unless it's in a loop
+    ```csharp
+    // ❌ Don't
+    var number = 2f;
+    var isAlive = true;
+
+	// ✅ Do
+	float number = 2f;
+	bool isAlive = true;
+	foreach(var element in elements)
+	{
+		DoSomething();
+	}
+    ```
+  - Use `new` instead of explicit constructors
+	  ```csharp
+	  // ❌ Don't
+	  Vector3 position = new Vector3(0f, 1f, 0f);
+
+	  // ✅ Do
+	  Vector3 position = new(0f, 1f, 0f);
 ### Order in Classes
   1. Constants
   2. Public exposed fields
@@ -182,10 +211,66 @@ transform.DoMoveX(1f, 1f)
 	.SetInverted()
 	.OnComplete(MyFunc);
 ```
-### Patterns & Anti-Patterns
-✅ Do
-  - Use `ScriptableObject` for shared shared or large datasets (enemies, player, items)
-  
-❌ Don’t
-   - Don't use `public` fields to expose members (use `[SerializeField] private`)
-   - Don't define more than one class per file
+## Example Class
+```csharp
+using UnityEngine;
+
+namespace ProjectName
+{
+	public class ClassName
+	{
+		private const int MAX_ENTITIES;
+		[field: SerializeField] public float MaxHealth { get; private set; }
+		[SerializeField] private float _speed ;
+
+		public float Health { get; private set; }
+		private SpriteRenderer _renderer;
+		private PlayerInputActions _inputActions;
+		private List<Enemy> _enemies;
+		
+		private void Awake()
+		{
+			_renderer = GetComponent<SpriteRenderer>();
+			_inputActions = new();
+
+			Health = MaxHealth;
+		}
+
+		private void OnEnable()
+		{
+			_inputActions.Enable();
+		}
+
+		private void OnDisable()
+		{
+			_inputActions.Disable();
+		}
+
+		private void Start()
+		{
+			_enemies = EntityManager.Instance.GetEnemies();
+		}
+
+		private void Update()
+		{
+			Move();
+		}
+
+		public void TakeDamage(float damage)
+		{
+			Health -= damage;
+		}
+
+		private void Move()
+		{
+			//Do movement calculations
+		}
+
+		private struct ExampleStruct()
+		{
+			public int Number;
+			public bool Boolean;
+		}
+	}
+}
+```
