@@ -9,7 +9,7 @@ Latest version can be found here - https://github.com/Gr4tte/Unity-Style-Guide
     - `Debug` - Visalizers and game modifying scripts meant for bug finding and testing
     - `Managers` - Singletons for one scene
     - `Systems` - Persistant Singletons across all scenes
-    - `Utils` - static helpers 
+    - `Utils` - static helpers and editor windows
     - `UI` - Interactable interfaces
     - `UX` - Effects and feedback
   - `Shaders`
