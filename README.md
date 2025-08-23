@@ -1,4 +1,5 @@
 # Unity C# Coding & Project Style Guide
+**Unfinished version still undergoing changes**  
 Latest version can be found here - https://github.com/Gr4tte/Unity-Style-Guide
 ## File Structure
 `!Project` - Contains all user created files aside from "Resources" folder
