@@ -3,7 +3,7 @@ using UnityEngine;
 namespace #NAMESPACE#
 {
     [CreateAssetMenu(fileName = "#SCRIPTNAME#", menuName = "ScriptableObjects/#SCRIPTNAME#")]
-    public class #SCRIPTNAME# : ScriptableObject
+    public class #SCRIPTNAME# : ScriptableBase
     {
         
     }
