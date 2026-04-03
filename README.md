@@ -103,18 +103,22 @@ Latest version can be found here - https://github.com/Gr4tte/Unity-Style-Guide
 	private List<int> _numbers;
 	private string[] _names;
 ## Unity Specific
-  - `Awake` - cache reference (don't call another class' methods or fields)
+  - `Awake` - cache references and initialize (don't call another class' methods or fields)
+  - `OnEnable` - Subscribe to events and enable objects
+  - `OnDisable` - Unsubscribe to events and disable objects
   - `Start` - initialization requiring another class' methods and fields
   - `Update` - gameplay loop 
     - Avoid `FindObjectOfType` or `GetComponent`
     - Avoid code other than method calls
 ## Patterns & Anti-Patterns
 ✅ Do
-  - Use `ScriptableObject` for shared shared or large datasets (enemies, player, items)
+  - Use `ScriptableObject` for shared or large datasets (enemies, player, items)
+  - Use `EventBus` for events on non `Static` or `Singleton` objects
   
 ❌ Don’t
-   - Don't use `public` fields to expose members (use `[SerializeField] private`)
-   - Don't define more than one class per file
+   - Use `public` fields to expose members (use `[SerializeField] private`)
+   - Define more than one class per file
+   - Subscribe to `UnityEvents` on other objects in the editor
 ## Code Style
 ### Formatting
   - **Indentation style** - Tabs
@@ -156,10 +160,11 @@ Latest version can be found here - https://github.com/Gr4tte/Unity-Style-Guide
   6. `Awake`
   7. `OnEnable`
   8. `OnDisable`
-  9. `Update`
-  10. Public methods
-  11. Private methods
-  12. Nested structs/Enums
+  9. `Start`
+  10. `Update`
+  11. Public methods
+  12. Private methods
+  13. Nested structs/Enums
 ### Nesting
 Avoid deep nesting by early returns
 ```csharp
